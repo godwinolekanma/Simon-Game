@@ -19,11 +19,19 @@ function gameMech(){
     randomPick = Math.floor(Math.random() * allButton.length);
     key = allButton[randomPick].id;
     buttonPicksList.push(key);
-    for (var i = 0; i < buttonPicksList.length; i++ ){
-        playSound(key);
-        buttonFlash(key);
+    for (var n = 0; n < buttonPicksList.length; n++) {
+        patternDelay(n)
     }
 }
+
+//function to delay the current game pattern
+function patternDelay(n){
+    setTimeout(function() {
+        playSound(buttonPicksList[n]);
+        buttonFlash(buttonPicksList[n]);
+    }, n * 600); // Delays each flash and sound for better visibility
+}
+
 
 
 $(".btn").on("click", function(){
@@ -31,10 +39,6 @@ $(".btn").on("click", function(){
     userClick.push(buttonClicked);  
     playSound(buttonClicked)
     buttonFlash(buttonClicked)
-    console.log(userClick)
-    console.log(buttonPicksList)
-    console.log(userClick[userClick.length - 1])
-    console.log(buttonPicksList[userClick.length - 1])
     if (userClick[userClick.length - 1] === buttonPicksList[userClick.length - 1]){
         if (buttonPicksList.length === userClick.length){
             setTimeout(function(){
