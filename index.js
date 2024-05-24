@@ -2,20 +2,20 @@ var allButton = $(".btn")
 var allButton = $(".btn")
 var buttonPicksList = [];
 var userClick = [];
+var count = 0;
 
 function gameStart(){
-    $(document).one("keypress", function(event){
+    $(".restart").one("click", function(){
         $("h1").text("Level 1");
-        var randomPick = Math.floor(Math.random() * allButton.length);
-        var key = allButton[randomPick].id
-        buttonPicksList.push(key)
-        playSound(key);
-        buttonFlash(key)
-    })
+        gameMech();
+    });
+   
 }
 
-function gameMech(holder){
-    // $("h1").text("Level " + count);
+function gameMech(){
+    count++
+    $("h1").text("Level " + count);
+    userClick = []
     randomPick = Math.floor(Math.random() * allButton.length);
     key = allButton[randomPick].id;
     buttonPicksList.push(key);
@@ -29,24 +29,30 @@ $(".btn").on("click", function(){
     userClick.push(buttonClicked);  
     playSound(buttonClicked)
     buttonFlash(buttonClicked)
-    for (var i = 0; i <= buttonPicksList.length; i++){
-        if (userClick[i] === buttonPicksList[i]){
-            $("h1").text("Level " + i);
-            if (buttonPicksList.length === userClick.length){
-                userClick = []
-                setTimeout(function(){
-                    gameMech(buttonPicksList.length)
-                }, 1000)      
-            }        
-        }
-        else if (userClick[i] !== buttonPicksList[i]){
-
-            userClick = [];
-            buttonPicksList = [];
-            playSound("wrong");
-            gameStart();
-        }
+    console.log(userClick)
+    console.log(buttonPicksList)
+    console.log(userClick[userClick.length - 1])
+    console.log(buttonPicksList[userClick.length - 1])
+    if (userClick[userClick.length - 1] === buttonPicksList[userClick.length - 1]){
+        if (buttonPicksList.length === userClick.length){
+            setTimeout(function(){
+                gameMech(buttonPicksList.length)
+            }, 1000)      
+        }        
     }
+    else{
+        $("body").addClass("game-over")
+        setTimeout(function(){
+            $("body").removeClass("game-over")
+        }, 100)
+        count=0;
+        buttonPicksList = [];
+        userClick = [];
+        playSound("wrong");
+        $("h1").text("Game Over, Please Press Start Button");
+        gameStart();
+    }
+
 });
 
 
@@ -92,5 +98,3 @@ function buttonFlash(key){
 
 
 gameStart()
-console.log(userClick)
-console.log(buttonPicksList)
