@@ -62,9 +62,9 @@ body {
   background-color: #FEF2BF;
 }
 
-@media (max-width: 600px){
+@media (max-width: 700px){
   .btn {
-    margin: 25px;
+  margin: 25px;
   display: inline-block;
   height: 300px;
   width: 300px;
