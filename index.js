@@ -19,8 +19,10 @@ function gameMech(){
     randomPick = Math.floor(Math.random() * allButton.length);
     key = allButton[randomPick].id;
     buttonPicksList.push(key);
-    playSound(key)
-    buttonFlash(key)
+    for (var i = 0; i < buttonPicksList.length; i++ ){
+        playSound(key);
+        buttonFlash(key);
+    }
 }
 
 
@@ -36,7 +38,7 @@ $(".btn").on("click", function(){
     if (userClick[userClick.length - 1] === buttonPicksList[userClick.length - 1]){
         if (buttonPicksList.length === userClick.length){
             setTimeout(function(){
-                gameMech(buttonPicksList.length)
+                gameMech()
             }, 1000)      
         }        
     }
