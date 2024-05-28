@@ -63,35 +63,28 @@ $(".btn").on("click", function(){
 
 
 function playSound(key){
-    switch (key){
+    var sound;
+    switch (key) {
         case "green":
-            var green = new Audio("sounds/green.mp3");
-            green.play();
+            sound = new Audio("sounds/green.mp3");
             break;
-    
         case "red":
-            var red = new Audio("sounds/red.mp3");
-            red.play();
+            sound = new Audio("sounds/red.mp3");
             break;
-    
         case "yellow":
-            var yellow = new Audio("sounds/yellow.mp3");
-            yellow.play();
+            sound = new Audio("sounds/yellow.mp3");
             break;
-    
         case "blue":
-            var blue = new Audio("sounds/blue.mp3");
-            blue.play();
+            sound = new Audio("sounds/blue.mp3");
             break;
-        
         case "wrong":
-            var wrong = new Audio("sounds/wrong.mp3");
-            wrong.play();
+            sound = new Audio("sounds/wrong.mp3");
             break;
-        
         default:
             console.log(key);
+            return; // Exit if no valid key
     }
+    sound.play();
 };
 
 function buttonFlash(key){
